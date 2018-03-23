@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>choe.learn.finatra</groupId>
+    <artifactId>wow-finatra</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>wow-finatra</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <scala.version>2.12.4</scala.version>
+        <finatra.version>18.2.0</finatra.version>
+        <quill.version>2.3.3</quill.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- Scala -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+        <!-- Finatra -->
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>finatra-http_2.12</artifactId>
+            <version>${finatra.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.getquill</groupId>
+            <artifactId>quill-finagle-mysql_2.12</artifactId>
+            <version>${quill.version}</version>
+        </dependency>
+
+        <!-- Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <recompileMode>incremental</recompileMode>
+                            <useZincServer>true</useZincServer>
+                            <args>
+                                <param>-language:_</param>
+                                <param>-g:vars</param>
+                                <param>-unchecked</param>
+                                <param>-deprecation</param>
+                                <param>-encoding</param>
+                                <param>utf8</param>
+                            </args>
+                            <javacArgs>
+                                <javacArg>-target</javacArg>
+                                <javacArg>8</javacArg>
+                                <javacArg>-source</javacArg>
+                                <javacArg>8</javacArg>
+                            </javacArgs>
+                        </configuration>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <!--
+                    <execution>
+                        <id>scala-test-compile</id>
+                        <phase>process-test-resources</phase>
+                        <configuration>
+                            <args>
+                                <param>-language:_</param>
+                                <param>-g:vars</param>
+                                <param>-unchecked</param>
+                                <param>-deprecation</param>
+                                <param>-encoding</param>
+                                <param>utf8</param>
+                            </args>
+                            <javacArgs>
+                                <javacArg>-target</javacArg>
+                                <javacArg>8</javacArg>
+                                <javacArg>-source</javacArg>
+                                <javacArg>8</javacArg>
+                            </javacArgs>
+                        </configuration>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                    -->
+                </executions>
+                <configuration>
+                    <jvmArgs>
+                        <jvmArg>-Xmx2G</jvmArg>
+                    </jvmArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
