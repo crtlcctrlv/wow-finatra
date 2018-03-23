@@ -1,1 +1,1 @@
-Demonstrates the capabilities of the Finatra through small, simple examples.
+Demonstrates the capabilities of the Finatra framework through small, simple examples.
